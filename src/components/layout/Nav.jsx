@@ -1,6 +1,6 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button } from '@nextui-org/react'
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
 import Link from 'next/link'
-import Cart from '../common/Cart'
+import UserNav from './UserNav'
 
 const Nav = () => {
   return (
@@ -34,19 +34,7 @@ const Nav = () => {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
-          <Link href='/login'>Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color='primary' href='#' variant='flat'>
-            Sign Up
-          </Button>
-        </NavbarItem>
-        <NavbarItem>
-          <Link href='cart' aria-current='page'>
-            <Cart />
-          </Link>
-        </NavbarItem>
+        <UserNav />
       </NavbarContent>
     </Navbar>
 

@@ -1,23 +1,50 @@
-import user from '../models/user'
-import bcrypt from 'bcryptjs'
+import { urlApi } from '@/components/utils/apiConfig'
+import { createUserModel, getUserAuthModel } from '../models/user'
+import jwt from 'jsonwebtoken'
+import mongoose from 'mongoose'
 
-export const createUser = async ({ email, password = '', name }) => {
-  if (password.length === 0 || password === '') {
-    return { error: 'El campo password no puede ir vacio' }
-  }
+export const createUser = async (res) => {
   try {
-    const userExist = await user.findOne({ email })
+    await mongoose.connect(urlApi)
+    console.log('db conectada')
 
-    if (userExist) {
-      return { error: 'Ya existe una cuenta con este email' }
-    }
-    const salt = await bcrypt.genSalt(10)
-    const passHashed = await bcrypt.hash(password, salt)
-    const newUser = user({ email, password: passHashed, name })
-    await newUser.save()
-    return { msg: 'Usuario creado correctamente' }
+    const userResponse = await createUserModel({
+      email: res.email,
+      password: res.password,
+      name: res.name
+    })
+    return userResponse
   } catch (error) {
-    // console.log(error)
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const getUserAuth = async (request) => {
+  try {
+    await mongoose.connect(urlApi)
+    console.log('db conectada')
+
+    const { searchParams } = new URL(request.url)
+    const email = searchParams.get('email')
+    const password = searchParams.get('password')
+
+    const payload = await getUserAuthModel({
+      email,
+      password
+    })
+
+    if (payload?.error) {
+      return payload.error
+    }
+
+    const token = jwt.sign(payload, process.env.SECRETTRACKSWORDS,
+      {
+        expiresIn: '30D'
+      })
+    return token
+  } catch (error) {
+    console.log(error)
     return { error: error.errors }
   }
 }

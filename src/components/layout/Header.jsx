@@ -2,7 +2,7 @@ import Nav from './Nav'
 
 const Header = () => {
   return (
-    <header>
+    <header className='w-11/12 grid mx-auto'>
       <Nav />
     </header>
   )
