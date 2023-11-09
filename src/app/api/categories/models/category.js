@@ -1,13 +1,13 @@
 import category from '../schema/category'
 
-export const createCategoryModel = async ({ name }) => {
+export const createCategoryModel = async ({ name, href }) => {
   try {
     const categoryExist = await category.findOne({ name })
 
     if (categoryExist) {
-      return { errro: { name: 'Ya existe una categoría con este nombre' } }
+      return { error: { name: 'Ya existe una categoría con este nombre' } }
     }
-    const newCat = category({ name })
+    const newCat = category({ name, href })
     await newCat.save()
     return { msg: 'Categoría creada correctamente', status: 200 }
   } catch (error) {

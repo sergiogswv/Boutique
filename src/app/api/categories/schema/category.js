@@ -5,8 +5,14 @@ const CategorySchema = new mongoose.Schema({
     type: String,
     required: [true, 'Campo del nombre es obligatorio'],
     trim: true,
-    lowercase: true,
     unique: true
+  },
+  href: {
+    type: String,
+    required: [true, 'Campo de la url es obligatorio'],
+    trim: true,
+    unique: true,
+    lowercase: true
   },
   createdAt: {
     type: Date,

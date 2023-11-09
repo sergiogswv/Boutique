@@ -3,13 +3,14 @@ import mongoose from 'mongoose'
 import { createCategoryModel, getCategoriesModel } from '../models/category'
 
 export const createCategory = async ({ request }) => {
-  const { name } = request
+  const { name, href } = request
   try {
     await mongoose.connect(urlApi)
     console.log('db conectada')
 
     const categoryResponse = await createCategoryModel({
-      name
+      name,
+      href
     })
     return categoryResponse
   } catch (error) {

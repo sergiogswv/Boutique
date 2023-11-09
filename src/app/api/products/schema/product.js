@@ -5,7 +5,6 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Campo del nombre es obligatorio'],
     trim: true,
-    lowercase: true,
     unique: true
   },
   category: {
@@ -25,6 +24,10 @@ const ProductSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now()
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 })
 
