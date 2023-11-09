@@ -20,12 +20,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, 'El campo password es requerido'],
     trim: true
-    // validate: {
-    //   validator: function (v) {
-    //     return /^(?=.*d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^wds:])([^s]){8,16}/.test(v)
-    //   },
-    //   message: props => 'No es un password válido!'
-    // }
   },
   created_At: {
     type: Date,
@@ -33,7 +27,6 @@ const UserSchema = new mongoose.Schema({
   }
 })
 // eslint-disable-next-line dot-notation
-const user = mongoose.models['modeluser']
-// const user = mongoose.models.Users || mongoose.model('modeluser', UserSchema)
+const user = mongoose.models['modeluser'] || mongoose.model('modeluser', UserSchema)
 
 export default user

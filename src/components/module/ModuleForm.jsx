@@ -26,8 +26,8 @@ const ModuleForm = () => {
         .min(6, 'El password debe de tener mínimo 6 caracteres')
         .max(20, 'El password debe de tener máximo 20 caracteres')
         .matches(
-          /^(?=.*d)(?=.*[A-Z])(?=.*[a-z])(?=.*[^wds:])([^s]){8,16}/,
-          'La contraseña no contiene mayusculas, minusculas, números o caracteres especiales'
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$_%&.,-]){8,16}/,
+          'La contraseña no contiene mayusculas, minusculas, números o caracteres especiales (#$_%&.,-)'
         ),
       name: Yup.string()
         .required('Este es un campo obligatorio')

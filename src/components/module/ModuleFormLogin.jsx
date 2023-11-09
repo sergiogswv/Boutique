@@ -6,10 +6,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Alert from '../common/Alert'
 import { Spinner } from '@nextui-org/react'
-import { useRouter } from 'next/navigation'
 
 const ModuleFormLogin = () => {
-  const router = useRouter()
   const [statusResponse, setStatusResponse] = useState(null)
   const [loading, setLoading] = useState(false)
   const formik = useFormik({
@@ -42,7 +40,7 @@ const ModuleFormLogin = () => {
       if (Object.keys(status).length > 0) {
         // eslint-disable-next-line no-undef
         localStorage.setItem('websession_botique', status)
-        router.push('/', { shallow: false })
+        window.location.reload()
         return
       }
 
