@@ -3,13 +3,13 @@ import mongoose from 'mongoose'
 import { createMenuItem, getMenuItems, updateItem } from '../model/home'
 
 export const createItem = async ({ request }) => {
-  const { block, img, active, title, description, href } = request
+  const { img, active, title, description, href } = request
   try {
     await mongoose.connect(urlApi)
     console.log('db conectada')
 
     const itemCreated = await createMenuItem({
-      block,
+
       img,
       active,
       title,
@@ -37,12 +37,12 @@ export const getAllItems = async () => {
 }
 
 export const updateItemMenu = async ({ request }) => {
-  const { id, block, img, active, title, description, href } = request
+  const { id, img, active, title, description, href } = request
   try {
     await mongoose.connect(urlApi)
     console.log('db conectada')
 
-    const itemUpdated = await updateItem({ id, block, img, active, title, description, href })
+    const itemUpdated = await updateItem({ id, img, active, title, description, href })
     return itemUpdated
   } catch (error) {
     console.log(error)

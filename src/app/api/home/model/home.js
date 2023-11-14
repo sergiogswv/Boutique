@@ -1,8 +1,8 @@
 import homeMenu from '../schema/home'
 
-export const createMenuItem = async ({ block, img, active, title, description, href }) => {
+export const createMenuItem = async ({ img, active, title, description, href }) => {
   try {
-    const newItem = homeMenu({ block, img, active, title, description, href })
+    const newItem = homeMenu({ img, active, title, description, href })
     await newItem.save()
     return { msg: 'Item para menú creado correctamente', status: 200 }
   } catch (error) {
@@ -23,7 +23,7 @@ export const getMenuItems = async () => {
   }
 }
 
-export const updateItem = async ({ id, block, img, active, title, description, href }) => {
+export const updateItem = async ({ id, img, active, title, description, href }) => {
   try {
     const itemExist = await homeMenu.findById({ _id: id })
 
@@ -31,7 +31,7 @@ export const updateItem = async ({ id, block, img, active, title, description, h
       return { error: { id: 'No existe este item.' } }
     }
 
-    const item = await homeMenu.findByIdAndUpdate(id, { block, img, active, title, description, href })
+    const item = await homeMenu.findByIdAndUpdate(id, { img, active, title, description, href })
     return item
   } catch (error) {
     console.log(error)

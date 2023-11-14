@@ -1,12 +1,6 @@
 import mongoose from 'mongoose'
 
 const HomeSchema = new mongoose.Schema({
-  block: {
-    type: Number,
-    required: [true, 'El campo de bloque es obligatorio'],
-    min: [1, 'Debe de tener un número mayor a 0'],
-    max: [5, 'Debe de tener un número menor a 5']
-  },
   img: {
     type: String,
     required: [true, 'El campo de imagen es obligatorio'],
@@ -18,12 +12,10 @@ const HomeSchema = new mongoose.Schema({
   },
   title: {
     type: String,
-    required: [true, 'El campo de titulo es obligatorio'],
-    lowercase: true
+    required: [true, 'El campo de titulo es obligatorio']
   },
   description: {
-    type: String,
-    lowercase: true
+    type: String
   },
   href: {
     type: String,

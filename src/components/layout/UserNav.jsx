@@ -46,13 +46,13 @@ const UserNav = () => {
             <NavbarItem>
               <Link href='/compras'>Mis compras</Link>
             </NavbarItem>
-            <NavbarItem>
-              <Link href='cart' aria-current='page'>
-                <Cart />
-              </Link>
-            </NavbarItem>
           </>
           )}
+      <NavbarItem>
+        <Link href='cart' aria-current='page'>
+          <Cart />
+        </Link>
+      </NavbarItem>
     </>
   )
 }

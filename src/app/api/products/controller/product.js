@@ -1,9 +1,9 @@
 import { urlApi } from '@/components/utils/apiConfig'
 import mongoose from 'mongoose'
-import { changeStatusProduct, createProductModel, getProductsModel } from '../models/product'
+import { changeStatusProduct, createProductModel, getOneProduct, getProductsModel } from '../models/product'
 
 export const createProduct = async ({ request }) => {
-  const { name, category, quantity, image } = request
+  const { name, category, quantity, image, sizes } = request
   try {
     await mongoose.connect(urlApi)
     console.log('db conectada')
@@ -12,7 +12,8 @@ export const createProduct = async ({ request }) => {
       name,
       category,
       quantity,
-      image
+      image,
+      sizes
     })
     return productResponse
   } catch (error) {
@@ -31,6 +32,22 @@ export const getProducts = async (request) => {
 
     const products = await getProductsModel({ category })
     return products
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const getProduct = async (request) => {
+  try {
+    await mongoose.connect(urlApi)
+    console.log('db conectada')
+
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    const product = await getOneProduct({ id })
+    return product
   } catch (error) {
     console.log(error)
     return { error: error.errors }

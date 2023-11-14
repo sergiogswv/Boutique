@@ -1,13 +1,13 @@
 import product from '../schema/product'
 
-export const createProductModel = async ({ name, category, quantity, image }) => {
+export const createProductModel = async ({ name, category, quantity, image, sizes }) => {
   try {
     const productExist = await product.findOne({ name })
 
     if (productExist) {
       return { error: { name: 'Ya existe un producto con este nombre' } }
     }
-    const newProduct = product({ name, category, quantity, image })
+    const newProduct = product({ name, category, quantity, image, sizes })
     await newProduct.save()
     return { msg: 'Producto creado correctamente', status: 200 }
   } catch (error) {
@@ -17,10 +17,9 @@ export const createProductModel = async ({ name, category, quantity, image }) =>
 }
 
 export const getProductsModel = async ({ category = null }) => {
-  console.log(category)
   try {
     if (category === null) {
-      const query = product.where({ active: true }).select(['name', 'category', 'image'])
+      const query = product.where({ active: true }).select(['name', 'category', 'image', 'quantity'])
       const products = await query.find()
       return products
     }
@@ -29,6 +28,21 @@ export const getProductsModel = async ({ category = null }) => {
     const productsByCategory = await query.find()
 
     return productsByCategory
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const getOneProduct = async ({ id }) => {
+  try {
+    const productExist = await product.findById({ _id: id })
+
+    if (!productExist) {
+      return { error: { id: 'El producto indicado no existe' } }
+    }
+
+    return productExist
   } catch (error) {
     console.log(error)
     return { error: error.errors }

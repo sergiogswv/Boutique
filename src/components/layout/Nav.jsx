@@ -13,9 +13,9 @@ const Nav = async () => {
         </Link>
       </NavbarBrand>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-        {items.map(({ _id, name, href }) => (
+        {items?.map(({ _id, name, href }) => (
           <NavbarItem key={_id}>
-            <Link href={href}>
+            <Link href={`/${href}`}>
               {name}
             </Link>
           </NavbarItem>
