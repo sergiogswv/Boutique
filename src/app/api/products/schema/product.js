@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const ProductSchema = new mongoose.Schema({
+export const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Campo del nombre es obligatorio'],
@@ -32,15 +32,21 @@ const ProductSchema = new mongoose.Schema({
   sizes: [
     {
       size: {
-        type: String,
-        required: true
+        type: String
       },
       quantity: {
         type: Number,
         required: true
       }
     }
-  ]
+  ],
+  price: {
+    type: Number,
+    required: [true, 'Debe tener un precio establecido']
+  },
+  size: {
+    type: String
+  }
 })
 
 // eslint-disable-next-line dot-notation

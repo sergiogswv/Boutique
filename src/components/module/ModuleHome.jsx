@@ -16,7 +16,6 @@ const ModuleHome = async () => {
             <h4 className='text-black font-medium text-2xl bg-gray-200 px-4 rounded-b-lg'>{description}</h4>
           </CardHeader>
           <Image
-            removeWrapper
             alt={title}
             width={400}
             height={400}

@@ -49,7 +49,7 @@ const UserNav = () => {
           </>
           )}
       <NavbarItem>
-        <Link href='cart' aria-current='page'>
+        <Link href='/carrito' aria-current='page'>
           <Cart />
         </Link>
       </NavbarItem>
