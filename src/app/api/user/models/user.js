@@ -36,7 +36,7 @@ export const getUserAuthModel = async ({ email, password }) => {
 
     const payload = {
       user: {
-        id: userExist.id,
+        id: userExist._id,
         email: userExist.email
       }
     }

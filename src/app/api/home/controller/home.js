@@ -6,7 +6,6 @@ export const createItem = async ({ request }) => {
   const { img, active, title, description, href } = request
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const itemCreated = await createMenuItem({
 
@@ -26,7 +25,6 @@ export const createItem = async ({ request }) => {
 export const getAllItems = async () => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const items = await getMenuItems()
     return items
@@ -40,7 +38,6 @@ export const updateItemMenu = async ({ request }) => {
   const { id, img, active, title, description, href } = request
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const itemUpdated = await updateItem({ id, img, active, title, description, href })
     return itemUpdated

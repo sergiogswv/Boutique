@@ -4,7 +4,7 @@ import UserNav from './UserNav'
 import { fetchFn } from '../utils/fetchFn'
 
 const Nav = async () => {
-  const items = await fetchFn({ endpoint: '/categories', method: 'GET', body: null })
+  const items = await fetchFn({ endpoint: '/categories', method: 'GET' })
   return (
     <Navbar shouldHideOnScroll>
       <NavbarBrand>

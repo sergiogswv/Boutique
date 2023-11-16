@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation'
 
 const UserNav = () => {
   const handleToken = useStore(state => state.handleToken)
-  // const token = useStore(state => state.token)
   const [localToken, setLocalToken] = useState(null)
   const router = useRouter()
 
@@ -39,14 +38,9 @@ const UserNav = () => {
           </>
           )
         : (
-          <>
-            <NavbarItem className='hidden lg:flex'>
-              <DropDownProfile />
-            </NavbarItem>
-            <NavbarItem>
-              <Link href='/compras'>Mis compras</Link>
-            </NavbarItem>
-          </>
+          <NavbarItem className='hidden lg:flex'>
+            <DropDownProfile />
+          </NavbarItem>
           )}
       <NavbarItem>
         <Link href='/carrito' aria-current='page'>

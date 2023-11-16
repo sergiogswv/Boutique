@@ -6,7 +6,6 @@ import { Badge } from '@nextui-org/react'
 
 const Cart = () => {
   const items = useStore(state => state.items)
-  console.log(items)
   return (
     <div>
       <Badge content={items.length} color='danger' placement='top-right'>

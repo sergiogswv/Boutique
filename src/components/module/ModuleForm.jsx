@@ -6,6 +6,7 @@ import * as Yup from 'yup'
 import Alert from '../common/Alert'
 import { useRouter } from 'next/navigation'
 import { Spinner } from '@nextui-org/react'
+import { fetchFn } from '../utils/fetchFn'
 
 const ModuleForm = () => {
   const router = useRouter()
@@ -35,11 +36,7 @@ const ModuleForm = () => {
     }),
     onSubmit: async (values) => {
       setLoading(true)
-      const url = window.location.origin
-      const response = await fetch(`${url}/api/user`, {
-        method: 'POST',
-        body: JSON.stringify(values)
-      })
+      const response = await fetchFn({ endpoint: '/user', method: 'POST', body: values })
       const status = await response.json()
       setLoading(false)
 

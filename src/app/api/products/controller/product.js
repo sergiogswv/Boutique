@@ -6,7 +6,6 @@ export const createProduct = async ({ request }) => {
   const { name, category, quantity, image, sizes } = request
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const productResponse = await createProductModel({
       name,
@@ -25,7 +24,6 @@ export const createProduct = async ({ request }) => {
 export const getProducts = async (request) => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const { searchParams } = new URL(request.url)
     const category = searchParams.get('category')
@@ -41,7 +39,6 @@ export const getProducts = async (request) => {
 export const getProduct = async (request) => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
@@ -57,7 +54,6 @@ export const getProduct = async (request) => {
 export const updateStatus = async (request) => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')

@@ -6,7 +6,6 @@ export const createCategory = async ({ request }) => {
   const { name, href } = request
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const categoryResponse = await createCategoryModel({
       name,
@@ -22,7 +21,6 @@ export const createCategory = async ({ request }) => {
 export const getCategories = async () => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const allCategories = await getCategoriesModel()
     return allCategories

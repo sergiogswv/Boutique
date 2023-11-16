@@ -52,7 +52,7 @@ const ButtonCart = ({ sizes, product }) => {
   return (
     <div className='w-full grid gap-2'>
       <div className='flex gap-4 mb-1 items-center'>
-        {sizes.map(size => (
+        {sizes?.map(size => (
           <Button
             size='sm'
             className={`${size.size === sizeSelected && 'focus:border-2 focus:border-gray-700 border-2 border-gray-700'} bg-gray-200 text-gray-950 font-bold text-xl`}
@@ -69,8 +69,9 @@ const ButtonCart = ({ sizes, product }) => {
           className='w-[100px] border-2 border-slate-500 rounded-xl text-right mr-5 pr-3'
           name='quantity'
           ref={finalQuantity}
+          defaultValue={1}
         >
-          <option disabled selected>0</option>
+          <option disabled selected value={0}>0</option>
           {renderOptions()}
         </select>
       </div>

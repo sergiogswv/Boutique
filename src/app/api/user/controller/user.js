@@ -1,12 +1,11 @@
 import { urlApi } from '@/components/utils/apiConfig'
 import { createUserModel, getUserAuthModel } from '../models/user'
-import jwt from 'jsonwebtoken'
+import * as jose from 'jose'
 import mongoose from 'mongoose'
 
 export const createUser = async (res) => {
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const userResponse = await createUserModel({
       email: res.email,
@@ -20,10 +19,13 @@ export const createUser = async (res) => {
   }
 }
 
-export const getUserAuth = async (request) => {
+export const login = async (request) => {
+  // const secret = process.env.SECRETTRACKSWORDS
+  const secret = new TextEncoder().encode(
+    process.env.SECRETTRACKSWORDS
+  )
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const { searchParams } = new URL(request.url)
     const email = searchParams.get('email')
@@ -38,10 +40,11 @@ export const getUserAuth = async (request) => {
       return payload.error
     }
 
-    const token = jwt.sign(payload, process.env.SECRETTRACKSWORDS,
-      {
-        expiresIn: '30D'
-      })
+    const token = await new jose.SignJWT(payload)
+      .setProtectedHeader({ alg: 'HS256' })
+      .setIssuedAt()
+      .setExpirationTime('30d')
+      .sign(secret)
     return token
   } catch (error) {
     console.log(error)

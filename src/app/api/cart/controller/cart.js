@@ -6,7 +6,6 @@ export const createCart = async ({ request }) => {
   const { products } = request
   try {
     await mongoose.connect(urlApi)
-    console.log('db conectada')
 
     const addCart = createShopCart({
       products
