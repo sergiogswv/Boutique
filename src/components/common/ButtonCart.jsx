@@ -33,7 +33,7 @@ const ButtonCart = ({ sizes, product }) => {
     return listOptions
   }
 
-  const handleAddCart = () => {
+  const handleAddCart = async () => {
     if (sizeSelected === '') {
       setErrorSize(true)
       return
@@ -45,8 +45,11 @@ const ButtonCart = ({ sizes, product }) => {
     }
 
     setErrorCount(false)
-    const toCart = { ...product, quantity: finalQuantity.current.value, sizes: sizeSelected }
+    const toCart = { ...product, quantity: finalQuantity.current.value, sizes: sizeSelected, idCart: crypto.randomUUID() }
     increaseItems(toCart)
+    // const data = { endpoint: '/cart', method: 'POST', body: toCart, front: true, token }
+    // const response = await fetchFn(data)
+    // console.log(response)
   }
 
   return (

@@ -2,10 +2,12 @@
 
 import { useStore } from '@/zustand'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
-import React from 'react'
+import { formatMail, formatName } from '../utils/formatFn'
+import Link from 'next/link'
 
 const DropDownProfile = async () => {
-  const handleToken = useStore(state => state.handleToken)
+  const handleToken = useStore((state) => state.handleToken)
+  const user = useStore((state) => state.user)
 
   const handleLogOut = () => {
     handleToken(null)
@@ -20,13 +22,16 @@ const DropDownProfile = async () => {
       </DropdownTrigger>
       <DropdownMenu aria-label='User Actions' variant='flat'>
         <DropdownItem key='profile' className='h-14 gap-2'>
-          <p className='font-bold'>@tonyreichert</p>
+          <p className='font-bold'>{formatName(user?.name)}</p>
+          <p className='font-bold italic'>{formatMail(user?.email)}</p>
         </DropdownItem>
         <DropdownItem key='shop'>
           Mis Compras
         </DropdownItem>
         <DropdownItem key='info'>
-          Mi Información
+          <Link href='/miperfil'>
+            Mi Información
+          </Link>
         </DropdownItem>
         <DropdownItem key='logout' color='danger' onClick={handleLogOut}>
           Cerrar Sesión

@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 import * as jose from 'jose'
 
-// export const config = {
-//   matcher: '/api/:function*'
-// }
+export const config = {
+  matcher: ['/api/:function*']
+}
 
 const prefixes = ['/api/cart', '/api/user/profile']
 const secret = new TextEncoder().encode(

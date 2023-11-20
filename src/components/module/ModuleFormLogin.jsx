@@ -6,7 +6,6 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Alert from '../common/Alert'
 import { Spinner } from '@nextui-org/react'
-import { fetchFn } from '../utils/fetchFn'
 
 const ModuleFormLogin = () => {
   const [statusResponse, setStatusResponse] = useState(null)
@@ -28,8 +27,13 @@ const ModuleFormLogin = () => {
     onSubmit: async (values) => {
       setLoading(true)
       const { email, password } = values
-      const response = await fetchFn({ endpoint: `/user?email=${email}&password=${password}`, method: 'GET' })
-      console.log(response)
+      const url = window.location.origin
+      const response = await fetch(
+        `${url}/api/user?email=${email}&password=${password}`,
+        {
+          method: 'GET'
+        }
+      )
       const status = await response.json()
 
       if (Object.keys(status).length > 0) {

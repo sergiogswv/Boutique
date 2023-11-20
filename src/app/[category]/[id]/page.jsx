@@ -1,15 +1,15 @@
-// import ModuleProduct from '@/components/module/ModuleProduct'
-// import { fetchFn } from '@/components/utils/fetchFn'
+import ModuleProduct from '@/components/module/ModuleProduct'
+import { fetchFn } from '@/components/utils/fetchFn'
 import React from 'react'
 
 const ProductPage = async ({ params }) => {
   console.log({ params })
-  // const product = await fetchFn({ endpoint: `/products/product?id=${params.id}`, method: 'GET', body: null })
+  const product = await fetchFn({ endpoint: `/products/product?id=${params.id}`, method: 'GET', body: null })
   return (
     <div className='w-10/12 grid grid-cols-[1fr_500px] mx-auto p-5 gap-5'>
-      {/* <ModuleProduct
+      <ModuleProduct
         product={product}
-      /> */}
+      />
 
     </div>
   )

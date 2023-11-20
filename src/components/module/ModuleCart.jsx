@@ -5,7 +5,7 @@ import Image from 'next/image'
 import React from 'react'
 import ButtonDelete from '../common/ButtonDelete'
 
-const ModuleCart = ({ item, index }) => {
+const ModuleCart = ({ item }) => {
   return (
     <Card
       isBlurred
@@ -35,7 +35,7 @@ const ModuleCart = ({ item, index }) => {
               </div>
             </div>
           </div>
-          <ButtonDelete index={index} />
+          <ButtonDelete item={item} />
         </div>
       </CardBody>
     </Card>

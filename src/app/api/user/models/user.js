@@ -1,3 +1,4 @@
+import aditionalInfo from '../profile/schema/profile'
 import user from '../schema/user'
 import bcrypt from 'bcryptjs'
 
@@ -36,12 +37,61 @@ export const getUserAuthModel = async ({ email, password }) => {
 
     const payload = {
       user: {
-        id: userExist._id,
-        email: userExist.email
+        id: userExist._id
       }
     }
 
     return payload
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const getCurrentUser = async ({ id }) => {
+  try {
+    const userExist = await user.findById({ _id: id }, ['email', 'name'])
+    if (!userExist) {
+      return { error: { user: 'Este usuario no existe.' } }
+    }
+
+    const aditional = await aditionalInfo.findOne({ userId: id })
+    return { userExist, aditional }
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const addAditionalInfo = async ({ lastname, address, zipcode, phone, references, userId }) => {
+  try {
+    const userExist = await user.findById({ _id: userId })
+    if (!userExist) {
+      return { error: { user: 'Este usuario no existe.' } }
+    }
+
+    const info = aditionalInfo({ lastname, address, zipcode, phone, references, userId })
+    await info.save()
+
+    return { msg: 'Información adicional creada correctamente', status: 200 }
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const updateInfoUser = async ({ name, lastname, address, zipcode, phone, references, userId }) => {
+  try {
+    const userExist = await user.findById({ _id: userId })
+    if (!userExist) {
+      return { error: { user: 'Este usuario no existe.' } }
+    }
+
+    await user.findByIdAndUpdate({ _id: userId }, { name })
+
+    await aditionalInfo.findOneAndUpdate({ userId }, { lastname, address, zipcode, phone, references, userId })
+
+    return { msg: 'Información actualizada correctamente', status: 200 }
   } catch (error) {
     console.log(error)
     return { error: error.errors }
