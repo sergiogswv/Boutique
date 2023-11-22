@@ -27,6 +27,7 @@ const UserNav = () => {
   }, [localToken])
 
   useEffect(() => {
+    console.log(localToken)
     const getData = async () => {
       // eslint-disable-next-line no-undef
       const token = localStorage.getItem('websession_botique')
@@ -46,29 +47,29 @@ const UserNav = () => {
         ? (
           <UserNavSkeleton />
           )
-        : !localToken
-            ? (
-              <>
-                <NavbarItem className='hidden lg:flex'>
-                  <Link href='/login'>Iniciar sesión</Link>
-                </NavbarItem>
-                <NavbarItem>
-                  <Button
-                    as={Link}
-                    color='primary'
-                    href='/registrarse'
-                    variant='flat'
-                  >
-                    Crear cuenta
-                  </Button>
-                </NavbarItem>
-              </>
-              )
-            : (
+        : localToken === null
+          ? (
+            <>
               <NavbarItem className='hidden lg:flex'>
-                <DropDownProfile />
+                <Link href='/login'>Iniciar sesión</Link>
               </NavbarItem>
-              )}
+              <NavbarItem>
+                <Button
+                  as={Link}
+                  color='primary'
+                  href='/registrarse'
+                  variant='flat'
+                >
+                  Crear cuenta
+                </Button>
+              </NavbarItem>
+            </>
+            )
+          : (
+            <NavbarItem className='hidden lg:flex'>
+              <DropDownProfile />
+            </NavbarItem>
+            )}
       <NavbarItem>
         <Link href='/carrito' aria-current='page'>
           <Cart />

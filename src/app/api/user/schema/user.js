@@ -24,6 +24,9 @@ const UserSchema = new mongoose.Schema({
   created_At: {
     type: Date,
     default: Date.now()
+  },
+  tokenConfirm: {
+    type: String
   }
 })
 // eslint-disable-next-line dot-notation

@@ -36,7 +36,7 @@ const ModuleFormLogin = () => {
       )
       const status = await response.json()
 
-      if (Object.keys(status).length > 0) {
+      if (!status.confirm && !status.email && !status.password) {
         // eslint-disable-next-line no-undef
         localStorage.setItem('websession_botique', status)
         window.location.reload()
@@ -47,7 +47,7 @@ const ModuleFormLogin = () => {
       setLoading(false)
       setTimeout(() => {
         setStatusResponse(null)
-      }, 1000)
+      }, 2000)
     }
   })
   return (
@@ -60,6 +60,11 @@ const ModuleFormLogin = () => {
       {statusResponse?.password !== undefined && (
         <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
           <p>{statusResponse?.password}</p>
+        </div>
+      )}
+      {statusResponse?.confirm !== undefined && (
+        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
+          <p>{statusResponse?.confirm}</p>
         </div>
       )}
       <div className='mb-6'>

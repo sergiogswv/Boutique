@@ -4,8 +4,7 @@ export const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Campo del nombre es obligatorio'],
-    trim: true,
-    unique: true
+    trim: true
   },
   category: {
     type: String,

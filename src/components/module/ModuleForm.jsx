@@ -41,11 +41,11 @@ const ModuleForm = () => {
         body: JSON.stringify(values)
       })
       const status = await response.json()
-      setLoading(false)
 
       if (status.status === 200) {
         router.push('/login')
       }
+      setLoading(false)
 
       setStatusResponse(status.error)
 

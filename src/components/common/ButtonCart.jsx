@@ -45,7 +45,7 @@ const ButtonCart = ({ sizes, product }) => {
     }
 
     setErrorCount(false)
-    const toCart = { ...product, quantity: finalQuantity.current.value, sizes: sizeSelected, idCart: crypto.randomUUID() }
+    const toCart = { ...product, quantity: finalQuantity.current.value, size: sizeSelected }
     increaseItems(toCart)
     // const data = { endpoint: '/cart', method: 'POST', body: toCart, front: true, token }
     // const response = await fetchFn(data)

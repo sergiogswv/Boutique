@@ -14,6 +14,10 @@ export const useStore = create(
         set((state) => ({ items: data }))
       },
       increaseItems: (item) => {
+        if (get().items === null) {
+          set(state => ({ items: [] }))
+        }
+
         if (get().items.length > 0) {
           const itemExist = get().items.find((i) => i._id === item._id)
           // New item
@@ -59,6 +63,9 @@ export const useStore = create(
       },
       deleteItems: (item) => {
         set((state) => ({ items: state.items.filter(i => i.idCart !== item.idCart) }))
+      },
+      clearItems: () => {
+        set(state => ({ items: [] }))
       },
       token: null,
       handleToken: (t) => set((state) => ({ token: t })),

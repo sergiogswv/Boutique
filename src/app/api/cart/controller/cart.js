@@ -1,6 +1,18 @@
 import { urlApi } from '@/components/utils/apiConfig'
 import mongoose from 'mongoose'
-import { createShopCart, deleteItemCart } from '../models/cart'
+import { createShopCart, deleteItemCart, getFullCart } from '../models/cart'
+
+export const getCartProducts = async ({ userId }) => {
+  try {
+    await mongoose.connect(urlApi)
+
+    const response = await getFullCart({ userId })
+    return response
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
 
 export const createCart = async ({ request, userId }) => {
   const { products } = request
@@ -18,12 +30,12 @@ export const createCart = async ({ request, userId }) => {
   }
 }
 
-export const deleteItem = async (request) => {
+export const deleteItem = async ({ idProduct, userId }) => {
   try {
     await mongoose.connect(urlApi)
 
-    const { id } = request
-    await deleteItemCart({ id })
+    const deleteResponse = await deleteItemCart({ idProduct, userId })
+    return deleteResponse
   } catch (error) {
     console.log(error)
     return { error: error.errors }

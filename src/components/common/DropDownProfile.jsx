@@ -4,15 +4,26 @@ import { useStore } from '@/zustand'
 import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from '@nextui-org/react'
 import { formatMail, formatName } from '../utils/formatFn'
 import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 
 const DropDownProfile = async () => {
-  const handleToken = useStore((state) => state.handleToken)
-  const user = useStore((state) => state.user)
+  const router = useRouter()
+  const pathname = usePathname()
+  const [handleToken, user] = useStore((state) => [state.handleToken, state.user])
 
   const handleLogOut = () => {
     handleToken(null)
     // eslint-disable-next-line no-undef
     localStorage.removeItem('websession_botique')
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem('webboutique_cart')
+    if (pathname === '/') {
+      router.refresh()
+    }
+
+    if (pathname !== '/') {
+      router.push('/')
+    }
   }
 
   return (
@@ -26,7 +37,9 @@ const DropDownProfile = async () => {
           <p className='font-bold italic'>{formatMail(user?.email)}</p>
         </DropdownItem>
         <DropdownItem key='shop'>
-          Mis Compras
+          <Link href='/compras'>
+            Mis Compras
+          </Link>
         </DropdownItem>
         <DropdownItem key='info'>
           <Link href='/miperfil'>
