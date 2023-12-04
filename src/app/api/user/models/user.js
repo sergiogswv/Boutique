@@ -49,6 +49,10 @@ export const getUserAuthModel = async ({ email, password }) => {
 }
 
 export const getCurrentUser = async ({ id }) => {
+  if (!id) {
+    return { userExist: {}, aditional: {} }
+  }
+
   try {
     const userExist = await user.findById({ _id: id }, ['email', 'name'])
     if (!userExist) {

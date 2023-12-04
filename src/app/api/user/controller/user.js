@@ -52,11 +52,10 @@ export const login = async (request) => {
 }
 
 export const getUser = async (request) => {
-  const { id } = request
   try {
     await mongoose.connect(urlApi)
 
-    const user = await getCurrentUser({ id })
+    const user = await getCurrentUser({ id: request?.id })
 
     return user
   } catch (error) {

@@ -10,7 +10,7 @@ import DropDownProfile from '../common/DropDownProfile'
 import UserNavSkeleton from '../module/skeletons/UserNavSkeleton'
 import { fetchFn } from '../utils/fetchFn'
 
-const UserNav = () => {
+const UserNav = ({ menuMobile }) => {
   const handleToken = useStore((state) => state.handleToken)
   const handleUser = useStore((state) => state.handleUser)
   const setItemsStorage = useStore((state) => state.setItemsStorage)
@@ -49,7 +49,11 @@ const UserNav = () => {
         : !localToken
             ? (
               <>
-                <NavbarItem className='hidden lg:flex'>
+                <Link href='/carrito' aria-current='page' className='flex md:hidden place-items-center gap-4'>
+                  <Cart />
+                  Mi Carrito
+                </Link>
+                <NavbarItem className='flex'>
                   <Link href='/login'>Iniciar sesión</Link>
                 </NavbarItem>
                 <NavbarItem>
@@ -70,7 +74,7 @@ const UserNav = () => {
               </NavbarItem>
               )}
       <NavbarItem>
-        <Link href='/carrito' aria-current='page'>
+        <Link href='/carrito' aria-current='page' className='hidden md:flex'>
           <Cart />
         </Link>
       </NavbarItem>

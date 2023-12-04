@@ -4,8 +4,8 @@ import { Suspense } from 'react'
 
 export default function Home () {
   return (
-    <main className='flex min-h-screen flex-col items-center p-12'>
-      <section className='w-10/12 gap-2 grid grid-cols-12 grid-rows-2 px-8 mx-auto'>
+    <main className='flex md:min-h-screen flex-col items-center mt-10 md:p-12'>
+      <section className='w-full md:w-10/12 gap-2 grid grid-cols-2 md:grid-cols-6 lg:grid-cols-12 md:grid-rows-2 px-2 md:px-8 mx-auto'>
         <Suspense fallback={<HomeSkeleton />}>
           <ModuleHome />
         </Suspense>

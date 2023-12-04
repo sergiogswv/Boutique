@@ -9,10 +9,10 @@ const ModuleHome = async () => {
   return (
     <>
       {items?.map(({ _id, title, description, img, href }) => (
-        <Card isFooterBlurred className='w-full h-[300px] col-span-4' key={_id}>
+        <Card isFooterBlurred className='w-full h-[300px] col-span-1 md:col-span-3 lg:col-span-4' key={_id}>
           <CardHeader className='absolute z-10 top-1 flex-col items-start'>
             <p className='text-tiny text-black/80 uppercase font-bold bg-gray-200 px-4 rounded-t-lg'>{title}</p>
-            <h4 className='text-black font-medium text-2xl bg-gray-200 px-4 rounded-b-lg'>{description}</h4>
+            <h3 className='text-black text-sm md:text-2xl bg-gray-200 px-1 md:px-4 rounded-b-lg'>{description}</h3>
           </CardHeader>
           <Image
             alt={title}

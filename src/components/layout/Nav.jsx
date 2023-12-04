@@ -1,25 +1,34 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+'use client'
+
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/react'
 import Link from 'next/link'
 import UserNav from './UserNav'
-import { fetchFn } from '../utils/fetchFn'
-import { Suspense } from 'react'
+
+import { Suspense, useState } from 'react'
 import Image from 'next/image'
 
-const Nav = async () => {
-  const items = await fetchFn({ endpoint: '/categories', method: 'GET' })
+const Nav = ({ items }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
   return (
-    <Navbar shouldHideOnScroll maxWidth='full' height='6rem'>
-      <NavbarBrand>
-        <Link href='/'>
-          <Image
-            alt='Logo Tracks Boutique'
-            src='/logoTracks.webp'
-            className='mt-10'
-            width={200}
-            height={200}
-          />
-        </Link>
-      </NavbarBrand>
+    <Navbar shouldHideOnScroll maxWidth='full' height='6rem' onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          className='sm:hidden'
+        />
+        <NavbarBrand>
+          <Link href='/'>
+            <Image
+              alt='Logo Tracks Boutique'
+              src='/logoTracks.webp'
+              className='w-6/12 md:mt-10'
+              width={200}
+              height={200}
+            />
+          </Link>
+        </NavbarBrand>
+      </NavbarContent>
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
         {items?.map(({ _id, name, href }) => (
           <NavbarItem key={_id}>
@@ -29,11 +38,27 @@ const Nav = async () => {
           </NavbarItem>
         ))}
       </NavbarContent>
-      <NavbarContent justify='end'>
+      <NavbarContent justify='end' className='hidden sm:flex gap-4'>
         <Suspense>
-          <UserNav />
+          <UserNav menuMobile={false} />
         </Suspense>
       </NavbarContent>
+      <NavbarMenu>
+        {items.map((item) => (
+          <NavbarMenuItem key={item._id}>
+            <Link
+              className='w-full'
+              href={item.href}
+              size='lg'
+            >
+              {item.name}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+        <Suspense>
+          <UserNav menuMobile />
+        </Suspense>
+      </NavbarMenu>
     </Navbar>
 
   )

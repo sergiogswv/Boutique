@@ -2,36 +2,36 @@
 
 import { useStore } from '@/zustand'
 import { Button } from '@nextui-org/react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 const ButtonCart = ({ sizes, product }) => {
   const increaseItems = useStore(state => state.increaseItems)
 
   const [sizeSelected, setSizeSelected] = useState('')
-  const [quantityAvailable, setQuantityAvailable] = useState({})
+  // const [quantityAvailable, setQuantityAvailable] = useState({})
   const [errorSize, setErrorSize] = useState(false)
   const [errorCount, setErrorCount] = useState(false)
   const finalQuantity = useRef(0)
 
-  useEffect(() => {
-    const quantity = sizes.filter(s => sizeSelected === s.size)
-    if (Object.entries(quantity).length > 0) {
-      setQuantityAvailable(quantity[0].quantity)
-    }
-  }, [sizeSelected])
+  // useEffect(() => {
+  //   const quantity = sizes.filter(s => sizeSelected === s.size)
+  //   if (Object.entries(quantity).length > 0) {
+  //     setQuantityAvailable(quantity[0].quantity)
+  //   }
+  // }, [sizeSelected])
 
   const handleSelected = (size) => {
     setSizeSelected(size)
     setErrorSize(false)
   }
 
-  const renderOptions = () => {
-    const listOptions = []
-    for (let i = 1; i <= quantityAvailable; i++) {
-      listOptions.push(<option value={i}>{i}</option>)
-    }
-    return listOptions
-  }
+  // const renderOptions = () => {
+  //   const listOptions = []
+  //   for (let i = 1; i <= quantityAvailable; i++) {
+  //     listOptions.push(<option value={i}>{i}</option>)
+  //   }
+  //   return listOptions
+  // }
 
   const handleAddCart = async () => {
     if (sizeSelected === '') {
@@ -67,7 +67,7 @@ const ButtonCart = ({ sizes, product }) => {
         ))}
       </div>
       {errorSize && <p className='italic text-red-700 text-md'>Debes elegir una talla mínimo</p>}
-      <div className='flex items-center gap-4 bg-white rounded-xl w-[200px] pb-5'>
+      {/* <div className='flex items-center gap-4 bg-white rounded-xl w-[200px] pb-5'>
         <select
           className='w-[100px] border-2 border-slate-500 rounded-xl text-right mr-5 pr-3'
           name='quantity'
@@ -77,7 +77,7 @@ const ButtonCart = ({ sizes, product }) => {
           <option disabled selected value={0}>0</option>
           {renderOptions()}
         </select>
-      </div>
+      </div> */}
       {errorCount && <p className='italic text-red-700 text-md'>Debes elegir una cantidad de prendas</p>}
       <Button
         className='text-xl text-white uppercase w-full my-2 mx-auto'
