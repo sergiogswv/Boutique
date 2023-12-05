@@ -4,11 +4,31 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuI
 import Link from 'next/link'
 import UserNav from './UserNav'
 
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import Image from 'next/image'
+import { redirect, usePathname } from 'next/navigation'
+import { useStore } from '@/zustand'
 
 const Nav = ({ items }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
+  const token = useStore(state => state.token)
+
+  useEffect(() => {
+    const local = localStorage.getItem('websession_botique')
+    const formatLocal = JSON.parse(local)
+    const prefixes = ['/miperfil', '/compras']
+
+    if (token == null && prefixes.some(prefix => pathname.startsWith(prefix))) {
+      redirect('/')
+    }
+
+    const prefixesWithProfile = ['/login']
+
+    if ((formatLocal || token?.token) && prefixesWithProfile.some(prefix => pathname.startsWith(prefix))) {
+      redirect('/')
+    }
+  }, [pathname])
 
   return (
     <Navbar shouldHideOnScroll maxWidth='full' height='6rem' onMenuOpenChange={setIsMenuOpen}>

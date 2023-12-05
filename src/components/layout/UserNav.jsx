@@ -30,7 +30,8 @@ const UserNav = ({ menuMobile }) => {
     const getData = async () => {
       // eslint-disable-next-line no-undef
       const token = localStorage.getItem('websession_botique')
-      const data = await fetchFn({ endpoint: '/user/profile', method: 'GET', token, front: true })
+      const local = JSON.parse(token)
+      const data = await fetchFn({ endpoint: '/user/profile', method: 'GET', token: local.token, front: true })
       handleUser(data.userExist)
       // eslint-disable-next-line no-undef
       const items = localStorage.getItem('webboutique_cart')
@@ -69,7 +70,7 @@ const UserNav = ({ menuMobile }) => {
               </>
               )
             : (
-              <NavbarItem className='hidden lg:flex'>
+              <NavbarItem className='flex'>
                 <DropDownProfile />
               </NavbarItem>
               )}

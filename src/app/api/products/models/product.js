@@ -21,6 +21,7 @@ export const getProductsModel = async ({ category = null }) => {
     if (category === null) {
       const query = product.where({ active: true }).select(['name', 'category', 'image', 'quantity'])
       const products = await query.find()
+      console.log(products)
       return products
     }
 

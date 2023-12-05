@@ -1,6 +1,4 @@
 export const fetchFn = async ({ endpoint, method, body = undefined, token = '', front = false }) => {
-  console.log({ endpoint, method, body, token })
-
   if (front) {
     const apiUrl = process.env.NEXT_PUBLIC_URL_API
     const url = `${apiUrl}/api${endpoint}`
@@ -9,7 +7,8 @@ export const fetchFn = async ({ endpoint, method, body = undefined, token = '', 
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: method === 'POST' ? JSON.stringify(body) : undefined
+      method,
+      body: method !== 'GET' ? JSON.stringify(body) : undefined
     })
     const data = await response.json()
     return data
@@ -22,7 +21,8 @@ export const fetchFn = async ({ endpoint, method, body = undefined, token = '', 
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     },
-    body: method === 'POST' ? JSON.stringify(body) : undefined
+    method,
+    body: method !== 'GET' ? JSON.stringify(body) : undefined
   })
   const data = await response.json()
   return data

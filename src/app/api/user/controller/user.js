@@ -1,5 +1,5 @@
 import { urlApi } from '@/components/utils/apiConfig'
-import { addAditionalInfo, createUserModel, getCurrentUser, getUserAuthModel, updateInfoUser } from '../models/user'
+import { addAditionalInfo, createUserModel, getCurrentUser, getUserAuthModel, getUserToReset, updateInfoUser, updateUserPass } from '../models/user'
 import * as jose from 'jose'
 import mongoose from 'mongoose'
 
@@ -103,6 +103,31 @@ export const updateInfo = async ({ info, dataUser }) => {
     })
 
     return user
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const userToResetPass = async ({ email }) => {
+  try {
+    await mongoose.connect(urlApi)
+
+    const user = await getUserToReset({ email })
+
+    return user
+  } catch (error) {
+    console.log(error)
+    return { error: error.errors }
+  }
+}
+
+export const userResetPass = async ({ email, tokenConfirm, password, confirm }) => {
+  try {
+    await mongoose.connect(urlApi)
+
+    const response = await updateUserPass({ email, tokenConfirm, password, confirm })
+    return response
   } catch (error) {
     console.log(error)
     return { error: error.errors }

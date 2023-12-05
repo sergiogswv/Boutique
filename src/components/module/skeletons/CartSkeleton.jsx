@@ -3,7 +3,7 @@ import React from 'react'
 
 const CartSkeleton = () => {
   return (
-    <Card className='w-11/12 space-y-5 p-4 grid grid-cols-3' radius='lg'>
+    <Card className='w-full space-y-5 p-4 grid grid-cols-3' radius='lg'>
       <Skeleton className='rounded-lg w-6/12 h-[200px]'>
         <div className='h-24 rounded-lg bg-default-300' />
       </Skeleton>

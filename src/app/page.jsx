@@ -1,3 +1,4 @@
+import ModuleFaqs from '@/components/module/ModuleFaqs'
 import ModuleHome from '@/components/module/ModuleHome'
 import HomeSkeleton from '@/components/module/skeletons/Home'
 import { Suspense } from 'react'
@@ -10,6 +11,8 @@ export default function Home () {
           <ModuleHome />
         </Suspense>
       </section>
+
+      <ModuleFaqs />
     </main>
   )
 }

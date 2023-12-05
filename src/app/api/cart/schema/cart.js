@@ -2,7 +2,9 @@ import mongoose from 'mongoose'
 import { ProductSchema } from '../../products/schema/product'
 
 const CartSchema = new mongoose.Schema({
-  products: [ProductSchema.omit(['sizes'])],
+  products: {
+    type: ProductSchema.omit(['sizes'])
+  },
   userId: {
     type: mongoose.Schema.Types.ObjectId, ref: 'modeluser'
   }

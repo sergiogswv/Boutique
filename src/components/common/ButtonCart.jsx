@@ -2,16 +2,16 @@
 
 import { useStore } from '@/zustand'
 import { Button } from '@nextui-org/react'
-import { useRef, useState } from 'react'
+// import { useState } from 'react'
 
-const ButtonCart = ({ sizes, product }) => {
+const ButtonCart = ({ size, product }) => {
   const increaseItems = useStore(state => state.increaseItems)
 
-  const [sizeSelected, setSizeSelected] = useState('')
+  // const [sizeSelected, setSizeSelected] = useState('')
   // const [quantityAvailable, setQuantityAvailable] = useState({})
-  const [errorSize, setErrorSize] = useState(false)
-  const [errorCount, setErrorCount] = useState(false)
-  const finalQuantity = useRef(0)
+  // const [errorSize, setErrorSize] = useState(false)
+  // const [errorCount, setErrorCount] = useState(false)
+  // const finalQuantity = useRef(0)
 
   // useEffect(() => {
   //   const quantity = sizes.filter(s => sizeSelected === s.size)
@@ -20,10 +20,10 @@ const ButtonCart = ({ sizes, product }) => {
   //   }
   // }, [sizeSelected])
 
-  const handleSelected = (size) => {
-    setSizeSelected(size)
-    setErrorSize(false)
-  }
+  // const handleSelected = (size) => {
+  //   setSizeSelected(size)
+  //   setErrorSize(false)
+  // }
 
   // const renderOptions = () => {
   //   const listOptions = []
@@ -34,18 +34,20 @@ const ButtonCart = ({ sizes, product }) => {
   // }
 
   const handleAddCart = async () => {
-    if (sizeSelected === '') {
-      setErrorSize(true)
-      return
-    }
+    // if (sizeSelected === '') {
+    //   setErrorSize(true)
+    //   return
+    // }
 
-    if (finalQuantity.current.value === '0') {
-      setErrorCount(true)
-      return
-    }
+    // if (finalQuantity.current.value === '0') {
+    //   setErrorCount(true)
+    //   return
+    // }
 
-    setErrorCount(false)
-    const toCart = { ...product, quantity: finalQuantity.current.value, sizes: sizeSelected, idCart: crypto.randomUUID() }
+    // setErrorCount(false)
+    // const toCart = { ...product, quantity: finalQuantity.current.value, size: sizeSelected }
+    // const toCart = { ...product, size: sizeSelected }
+    const toCart = { ...product, size }
     increaseItems(toCart)
     // const data = { endpoint: '/cart', method: 'POST', body: toCart, front: true, token }
     // const response = await fetchFn(data)
@@ -55,7 +57,8 @@ const ButtonCart = ({ sizes, product }) => {
   return (
     <div className='w-full grid gap-2'>
       <div className='flex gap-4 mb-1 items-center'>
-        {sizes?.map(size => (
+        {/* Solo si tiene varias tallas, validar... */}
+        {/* {sizes?.map(size => (
           <Button
             size='sm'
             className={`${size.size === sizeSelected && 'focus:border-2 focus:border-gray-700 border-2 border-gray-700'} bg-gray-200 text-gray-950 font-bold text-xl`}
@@ -64,9 +67,10 @@ const ButtonCart = ({ sizes, product }) => {
           >
             {size.size}
           </Button>
-        ))}
+        ))} */}
+        <p className='text-gray-700 text-3xl'>Modelo en talla: <span className='font-bold'>{size}</span></p>
       </div>
-      {errorSize && <p className='italic text-red-700 text-md'>Debes elegir una talla mínimo</p>}
+      {/* {errorSize && <p className='italic text-red-700 text-md'>Debes elegir una talla mínimo</p>} */}
       {/* <div className='flex items-center gap-4 bg-white rounded-xl w-[200px] pb-5'>
         <select
           className='w-[100px] border-2 border-slate-500 rounded-xl text-right mr-5 pr-3'
@@ -78,7 +82,7 @@ const ButtonCart = ({ sizes, product }) => {
           {renderOptions()}
         </select>
       </div> */}
-      {errorCount && <p className='italic text-red-700 text-md'>Debes elegir una cantidad de prendas</p>}
+      {/* {errorCount && <p className='italic text-red-700 text-md'>Debes elegir una cantidad de prendas</p>} */}
       <Button
         className='text-xl text-white uppercase w-full my-2 mx-auto'
         variant='shadow'

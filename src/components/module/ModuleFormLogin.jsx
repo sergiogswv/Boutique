@@ -6,10 +6,13 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import Alert from '../common/Alert'
 import { Spinner } from '@nextui-org/react'
+import { useStore } from '@/zustand'
 
 const ModuleFormLogin = () => {
+  const [handleToken] = useStore(state => [state.handleToken])
   const [statusResponse, setStatusResponse] = useState(null)
   const [loading, setLoading] = useState(false)
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -36,30 +39,37 @@ const ModuleFormLogin = () => {
       )
       const status = await response.json()
 
-      if (Object.keys(status).length > 0) {
+      if (!status.confirm && !status.email && !status.password) {
+        const responseToken = { token: status }
         // eslint-disable-next-line no-undef
-        localStorage.setItem('websession_botique', status)
+        localStorage.setItem('websession_botique', JSON.stringify(responseToken))
+        handleToken(status)
+        // router.push('/')
         window.location.reload()
-        return
       }
 
       setStatusResponse(status)
       setLoading(false)
       setTimeout(() => {
         setStatusResponse(null)
-      }, 1000)
+      }, 2000)
     }
   })
   return (
-    <form className='w-5/12 mt-5' onSubmit={formik.handleSubmit}>
+    <form className='w-full md:w-5/12 mt-5' onSubmit={formik.handleSubmit}>
       {statusResponse?.email && (
-        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
+        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[80px] md:h-[50px] text-center uppercase text-sm md:text-lg'>
           <p>{statusResponse?.email}</p>
         </div>
       )}
       {statusResponse?.password !== undefined && (
-        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
+        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[80px] md:h-[50px] text-center uppercase text-sm md:text-lg'>
           <p>{statusResponse?.password}</p>
+        </div>
+      )}
+      {statusResponse?.confirm !== undefined && (
+        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[80px] md:h-[50px] text-center uppercase text-sm md:text-lg'>
+          <p>{statusResponse?.confirm}</p>
         </div>
       )}
       <div className='mb-6'>
@@ -103,9 +113,12 @@ const ModuleFormLogin = () => {
           <Alert error={formik.errors.password} />
         )}
       </div>
-      <div className='flex items-start mb-6'>
-        <Link href='/registrarse' className='text-md font-medium text-blue-400'>
+      <div className='grid gap-4 md:flex md:gap-1 items-start justify-between mb-6'>
+        <Link href='/registrarse' className='text-sm md:text-md font-medium text-blue-400'>
           Crea tu cuenta aquí
+        </Link>
+        <Link href='/recuperar-password' className='text-sm md:text-md font-medium text-blue-400'>
+          Olvide mi contraseña
         </Link>
       </div>
       <div className='flex gap-5'>
@@ -113,9 +126,8 @@ const ModuleFormLogin = () => {
           type='submit'
           className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center'
         >
-          Siguiente
+          {loading ? <Spinner /> : 'Siguiente'}
         </button>
-        {loading && <Spinner />}
       </div>
     </form>
   )

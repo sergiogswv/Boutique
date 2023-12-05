@@ -11,6 +11,11 @@ export default function RootLayout ({ children }) {
     <html lang='en'>
       <head>
         <title>eCommerce</title>
+        <script
+          type='module'
+          crossOrigin='true'
+          src='https://assets.conekta.com/component/3.3.3/assets/component.min.js'
+        />
       </head>
       <body>
         <Layout />

@@ -6,13 +6,16 @@ import { formatMail, formatName } from '../utils/formatFn'
 import Link from 'next/link'
 
 const DropDownProfile = async () => {
-  const handleToken = useStore((state) => state.handleToken)
-  const user = useStore((state) => state.user)
+  const [handleToken, user] = useStore((state) => [state.handleToken, state.user])
 
   const handleLogOut = () => {
     handleToken(null)
     // eslint-disable-next-line no-undef
     localStorage.removeItem('websession_botique')
+    // eslint-disable-next-line no-undef
+    localStorage.removeItem('webboutique_cart')
+
+    window.location.reload()
   }
 
   return (
@@ -26,7 +29,9 @@ const DropDownProfile = async () => {
           <p className='font-bold italic'>{formatMail(user?.email)}</p>
         </DropdownItem>
         <DropdownItem key='shop'>
-          Mis Compras
+          <Link href='/compras'>
+            Mis Compras
+          </Link>
         </DropdownItem>
         <DropdownItem key='info'>
           <Link href='/miperfil'>

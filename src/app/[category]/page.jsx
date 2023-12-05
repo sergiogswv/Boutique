@@ -23,7 +23,7 @@ const CategoryPage = async ({ params }) => {
             </CardBody>
             <CardFooter className='text-lg justify-between bg-blue-200'>
               <b>{product.name}</b>
-              {product.quantity > 0 ? (<p className='text-default-500'>Disponibles: {product.quantity}</p>) : <p className='text-default-500'>Sin disponibilidad</p>}
+              {!product.selled ? (<p className='text-default-500'>Disponibles</p>) : <p className='text-default-500'>Sin disponibilidad</p>}
             </CardFooter>
           </Card>
         ))

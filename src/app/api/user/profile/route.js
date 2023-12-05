@@ -4,6 +4,9 @@ import { aditionalInfo, getUser, updateInfo } from '../controller/user'
 export async function GET (request) {
   const user = request.headers.get('currentUser')
   try {
+    if (user === 'null') {
+      return NextResponse.json({ data: '' })
+    }
     const request = JSON.parse(user)
 
     const data = await getUser(request)

@@ -30,8 +30,7 @@ const ModuleCart = ({ item }) => {
               <div className='flex flex-col gap-0'>
                 <h2 className='font-semibold text-foreground/90 text-5xl'>{item.name}</h2>
                 <p className='text-md italic text-foreground/60 uppercase'>{item.category}</p>
-                <h3 className='font-medium mt-2 text-3xl'>Talla: {item.sizes}</h3>
-                <p className='text-lg text-foreground/80 font-bold'>Piezas: {item.quantity}</p>
+                <h3 className='font-medium mt-2 text-3xl'>Precio: ${item.price}</h3>
               </div>
             </div>
           </div>
