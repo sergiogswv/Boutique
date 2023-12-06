@@ -1,5 +1,6 @@
 import Layout from '@/components/layout/Layout'
 import './globals.css'
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: 'Create Next App',

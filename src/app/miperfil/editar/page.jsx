@@ -1,5 +1,3 @@
-'use client'
-
 import ModuleEdit from '@/components/module/ModuleEdit'
 import React from 'react'
 

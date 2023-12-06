@@ -1,5 +1,3 @@
-'use client'
-
 import ModuleProfile from '@/components/module/ModuleProfile'
 import React from 'react'
 
