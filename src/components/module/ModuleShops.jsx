@@ -13,14 +13,7 @@ const ModuleShops = () => {
 
   useEffect(() => {
     const local = JSON.parse(token)
-    console.log(local)
     const getShops = async () => {
-      console.log({
-        endpoint: '/cart',
-        method: 'GET',
-        front: true,
-        token: local.token
-      })
       const items = await fetchFn({
         endpoint: '/cart',
         method: 'GET',
@@ -28,7 +21,6 @@ const ModuleShops = () => {
         token: local.token
       })
       setShops(items)
-      console.log(items)
     }
 
     getShops()
