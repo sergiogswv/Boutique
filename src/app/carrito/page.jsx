@@ -24,8 +24,9 @@ const CartPage = () => {
   const [total, setTotal] = useState(0)
 
   useEffect(() => {
+    let local = ''
     // eslint-disable-next-line no-undef
-    const local = JSON.parse(localStorage.getItem('websession_botique'))
+    local = JSON.parse(localStorage.getItem('websession_botique'))
     setToken(local.token)
 
     setTimeout(() => {

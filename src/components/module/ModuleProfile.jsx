@@ -13,7 +13,8 @@ const ModuleProfile = () => {
     const getData = async () => {
       // eslint-disable-next-line no-undef
       const token = localStorage.getItem('websession_botique')
-      const local = JSON.parse(token)
+      let local = ''
+      local = JSON.parse(token)
       const data = await fetchFn({ endpoint: '/user/profile', method: 'GET', token: local.token, front: true })
       setUserData(data)
       setLoading(false)
