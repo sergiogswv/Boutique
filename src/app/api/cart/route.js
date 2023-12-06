@@ -1,19 +1,21 @@
 import { NextResponse } from 'next/server'
 import product from '../products/schema/product'
+import { createCart, getCartProducts } from './controller/cart'
 // import { deleteItem, createCart, getCartProducts } from './controller/cart'
 // import { validateUser } from '@/components/utils/validateUser'
 
-// export async function GET (request) {
-//   const currentUser = request.headers.get('currentUser')
-//   const user = validateUser({ currentUser })
-//   try {
-//     const products = await getCartProducts({ userId: user.id })
-//     return NextResponse.json(products)
-//   } catch (error) {
-//     console.log(error)
-//     return { error: `Hubo un error: ${error}` }
-//   }
-// }
+export async function GET (request) {
+  const currentUser = request.headers.get('currentUser')
+  const user = JSON.parse(currentUser)
+
+  try {
+    const products = await getCartProducts({ userId: user.id })
+    return NextResponse.json(products)
+  } catch (error) {
+    console.log(error)
+    return { error: `Hubo un error: ${error}` }
+  }
+}
 
 // export async function POST (request) {
 //   const currentUser = request.headers.get('currentUser')
@@ -47,6 +49,8 @@ import product from '../products/schema/product'
 
 export async function POST (req, res) {
   const conekta = process.env.SHOP_CONEKTA_PRIVATE_KEY
+  const currentUser = req.headers.get('currentUser')
+  const user = JSON.parse(currentUser)
   try {
     const request = await req.json()
     const itemsToUpdate = request.line_items
@@ -67,9 +71,11 @@ export async function POST (req, res) {
       itemsToUpdate.map(async item => {
         await product.findByIdAndUpdate({ _id: item.id }, { selled: true })
       })
+      const products = { products: itemsToUpdate }
+      await createCart({ request: products, userId: user.id, completed: true })
     }
-
     return NextResponse.json(responseConekta)
   } catch (error) {
+    console.log(error)
   }
 }

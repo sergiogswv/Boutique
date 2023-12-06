@@ -14,14 +14,16 @@ export const getCartProducts = async ({ userId }) => {
   }
 }
 
-export const createCart = async ({ request, userId }) => {
+export const createCart = async ({ request, userId, completed = false }) => {
   const { products } = request
+
   try {
     await mongoose.connect(urlApi)
 
     const addCart = createShopCart({
       products,
-      userId
+      userId,
+      completed
     })
     return addCart
   } catch (error) {

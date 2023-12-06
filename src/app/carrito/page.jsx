@@ -45,7 +45,9 @@ const CartPage = () => {
       const unit_price = item.price * 100
       const quantity = 1
       const id = item._id
-      return { name, unit_price, quantity, id }
+      const price = item.price
+      const image = item.image
+      return { name, unit_price, quantity, id, price, image }
     })
     setItemData(itemData)
   }, [itemsCart])
