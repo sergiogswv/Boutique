@@ -1,12 +1,10 @@
 import mongoose from 'mongoose'
 
-const ProductSchema = new mongoose.Schema({
+export const ProductSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Campo del nombre es obligatorio'],
-    trim: true,
-    lowercase: true,
-    unique: true
+    trim: true
   },
   category: {
     type: String,
@@ -25,6 +23,32 @@ const ProductSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now()
+  },
+  active: {
+    type: Boolean,
+    default: true
+  },
+  // sizes: [
+  //   {
+  //     size: {
+  //       type: String
+  //     },
+  //     quantity: {
+  //       type: Number,
+  //       required: true
+  //     }
+  //   }
+  // ],
+  price: {
+    type: Number,
+    required: [true, 'Debe tener un precio establecido']
+  },
+  size: {
+    type: String
+  },
+  selled: {
+    type: Boolean,
+    default: false
   }
 })
 

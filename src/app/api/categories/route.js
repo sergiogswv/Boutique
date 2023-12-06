@@ -13,7 +13,7 @@ export async function POST (req, res) {
   }
 }
 
-export async function GET (req, res) {
+export async function GET () {
   try {
     const categories = await getCategories()
 
