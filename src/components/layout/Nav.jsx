@@ -17,8 +17,7 @@ const Nav = ({ items }) => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const local = localStorage.getItem('websession_botique')
-    let formatLocal = ''
-    formatLocal = JSON.parse(local)
+    const formatLocal = JSON.parse(local)
     const prefixes = ['/miperfil', '/compras']
 
     if (token == null && prefixes.some(prefix => pathname.startsWith(prefix))) {

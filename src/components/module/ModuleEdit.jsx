@@ -16,8 +16,7 @@ const ModuleEdit = () => {
     const getData = async () => {
       // eslint-disable-next-line no-undef
       const t = localStorage.getItem('websession_botique')
-      let local = ''
-      local = JSON.parse(t)
+      const local = JSON.parse(t)
       setToken(local.token)
       const data = await fetchFn({
         endpoint: '/user/profile',

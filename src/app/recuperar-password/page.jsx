@@ -1,3 +1,5 @@
+'use client'
+
 import Title from '@/components/common/Title'
 import ModuleFormRestart from '@/components/module/ModuleFormRestart'
 

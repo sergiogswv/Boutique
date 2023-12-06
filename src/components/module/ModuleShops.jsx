@@ -12,8 +12,7 @@ const ModuleShops = () => {
   const [shops, setShops] = useState([])
 
   useEffect(() => {
-    let local = ''
-    local = JSON.parse(token)
+    const local = JSON.parse(token)
     const getShops = async () => {
       const items = await fetchFn({
         endpoint: '/cart',
