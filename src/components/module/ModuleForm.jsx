@@ -29,6 +29,9 @@ const ModuleForm = () => {
           /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[#$_%&.,-]){8,16}/,
           'La contraseña no contiene mayusculas, minusculas, números o caracteres especiales (#$_%&.,-)'
         ),
+      confirm: Yup.string()
+        .required('Este es un campo obligatorio')
+        .oneOf([Yup.ref('password'), null], 'Las contraseñas deben de coincidir'),
       name: Yup.string()
         .required('Este es un campo obligatorio')
         .min(3, 'El password debe de tener mínimo 3 caracteres')
@@ -55,7 +58,7 @@ const ModuleForm = () => {
     }
   })
   return (
-    <form className='w-5/12 mt-5' onSubmit={formik.handleSubmit}>
+    <form className='w-full md:w-5/12 mt-5' onSubmit={formik.handleSubmit}>
       {statusResponse?.email && (
         <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
           <p>{statusResponse?.email}</p>
@@ -126,6 +129,26 @@ const ModuleForm = () => {
         />
         {formik.errors.password && formik.touched.password && (
           <Alert error={formik.errors.password} />
+        )}
+      </div>
+      <div className='mb-6'>
+        <label
+          htmlFor='confirm'
+          className='block mb-2 text-sm font-medium text-gray-900'
+        >
+          Confirmar Password:
+        </label>
+        <input
+          type='password'
+          id='confirm'
+          className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5'
+          required
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          value={formik.values.confirm}
+        />
+        {formik.errors.confirm && formik.touched.confirm && (
+          <Alert error={formik.errors.confirm} />
         )}
       </div>
       <div className='flex gap-5'>
