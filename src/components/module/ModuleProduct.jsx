@@ -7,6 +7,7 @@ import { fetchFn } from '../utils/fetchFn'
 import { Spinner } from '@nextui-org/react'
 
 const ModuleProduct = ({ id }) => {
+  const [main, setMain] = useState({ index: 0, img: '/tracksLogo.png' })
   const [currentProduct, setCurrentProduct] = useState({})
   const [loading, setLoading] = useState(true)
 
@@ -14,24 +15,27 @@ const ModuleProduct = ({ id }) => {
     const getProduct = async () => {
       setLoading(true)
       const product = await fetchFn({
-        endpoint: `/products/product?id=${id}`,
+        endpoint: `/products/product?id=${id[0]}`,
         method: 'GET',
         body: null,
         front: true
       })
+      setMain({ index: 0, img: product.image })
       setCurrentProduct(product)
     }
 
     getProduct()
-    setLoading(false)
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
   }, [])
 
-  // const handleMain = (value, img) => {
-  //   setMain({
-  //     index: value,
-  //     img
-  //   })
-  // }
+  const handleMain = (value, img) => {
+    setMain({
+      index: value,
+      img
+    })
+  }
 
   return (
     <>
@@ -39,8 +43,8 @@ const ModuleProduct = ({ id }) => {
         ? (
           <>
             <div className='p-2 md:p-5'>
-              {currentProduct.image &&
-                (
+              {currentProduct.image
+                ? (
                   <Image
                     alt={`${currentProduct.name} ${currentProduct.category}`}
                     src={`/clothes/${currentProduct.image}`}
@@ -48,7 +52,14 @@ const ModuleProduct = ({ id }) => {
                     height={500}
                     className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
                   />
-                )}
+                  )
+                : (<Image
+                    alt={`${currentProduct.name} ${currentProduct.category}`}
+                    src={`/clothes/${main.img}`}
+                    width={800}
+                    height={500}
+                    className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
+                   />)}
 
               <div className='grid grid-cols-3 w-full place-items-center mt-4'>
                 {currentProduct.aditionals?.map((img, index) => (
@@ -59,7 +70,7 @@ const ModuleProduct = ({ id }) => {
                     width={800}
                     height={500}
                     className='w-11/12 h-[100px] md:h-[200px] object-cover rounded-xl col-span-1 cursor-pointer'
-                    // onClick={() => handleMain(index, img)}
+                    onClick={() => handleMain(index, img)}
                   />
                 ))}
               </div>
