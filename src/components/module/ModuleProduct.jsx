@@ -39,14 +39,14 @@ const ModuleProduct = ({ product }) => {
             )}
 
         <div className='grid grid-cols-3 w-full place-items-center mt-4'>
-          {aditionals.map((img, index) =>
+          {aditionals?.map((img, index) =>
             <Image
               key={index}
               alt={img}
               src={`/clothes/${img}`}
               width={800}
               height={500}
-              className='w-11/12 h-[200px] object-cover rounded-xl col-span-1 cursor-pointer'
+              className='w-11/12 h-[100px] md:h-[200px] object-cover rounded-xl col-span-1 cursor-pointer'
               onClick={() => handleMain(index, img)}
             />
           )}

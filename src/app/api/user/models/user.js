@@ -3,6 +3,7 @@ import user from '../schema/user'
 import bcrypt from 'bcryptjs'
 import TemplateRegister from '@/components/email/TemplateRegister'
 import { Resend } from 'resend'
+import TemplateRestart from '@/components/email/TemplarteRestart'
 
 export const createUserModel = async ({ email, password, name }) => {
   if (password.length === 0 || password === '') {
@@ -24,10 +25,12 @@ export const createUserModel = async ({ email, password, name }) => {
 
     const data = await resend.emails.send({
       from: 'Tracks Boutique <onboarding@resend.dev>',
-      to: [email],
+      // to: [email]
+      to: 'sguadarrama@yavocapital.com',
       subject: 'Bienvenido Tracks Boutique',
       react: TemplateRegister({ name, email, tokenConfirm })
     })
+    console.log(data)
     return { msg: 'Usuario creado correctamente', status: 200, data }
   } catch (error) {
     console.log(error)
@@ -127,6 +130,16 @@ export const getUserToReset = async ({ email }) => {
 
     const tokenConfirm = crypto.randomUUID()
     const userUpdated = await user.findOneAndUpdate({ email }, { tokenConfirm })
+
+    const resend = new Resend(process.env.RESEND_API_KEY)
+
+    await resend.emails.send({
+      from: 'Tracks Boutique <onboarding@resend.dev>',
+      // to: [email],
+      to: ['sguadarrama@yavocapital.com'],
+      subject: 'Bienvenido Tracks Boutique',
+      react: TemplateRestart({ email, tokenConfirm })
+    })
 
     return userUpdated
   } catch (error) {

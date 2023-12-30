@@ -42,10 +42,10 @@ const Nav = ({ items }) => {
           <Link href='/'>
             <Image
               alt='Logo Tracks Boutique'
-              src='/logoTracks.webp'
+              src='/horizontalLogoTracks.png'
               className='w-6/12 md:mt-10'
-              width={200}
-              height={200}
+              width={350}
+              height={350}
             />
           </Link>
         </NavbarBrand>

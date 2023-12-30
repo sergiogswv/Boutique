@@ -9,6 +9,7 @@ import { Spinner } from '@nextui-org/react'
 const ModuleFormRestart = () => {
   const [statusResponse, setStatusResponse] = useState(null)
   const [loading, setLoading] = useState(false)
+  const [msg, setMsg] = useState(null)
 
   const formik = useFormik({
     initialValues: {
@@ -37,16 +38,21 @@ const ModuleFormRestart = () => {
       if (!user?.token) {
         setStatusResponse(user.error)
       }
-      console.log(user)
 
-      // envia email
+      setLoading(false)
+      setMsg('Revisa tu cuenta de correo para continuar con este proceso.')
     }
   })
   return (
     <form className='w-11/12 md:w-5/12 mt-5' onSubmit={formik.handleSubmit}>
       {statusResponse?.email && (
-        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-lg'>
+        <div className='text-white bg-red-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[50px] text-center uppercase text-sm md:text-lg'>
           <p>{statusResponse?.email}</p>
+        </div>
+      )}
+      {msg !== null && (
+        <div className='text-white bg-green-500 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[60px] md:h-[75px] text-center uppercase text-sm md:text-lg'>
+          <p>{msg}</p>
         </div>
       )}
       <div className='mb-6'>

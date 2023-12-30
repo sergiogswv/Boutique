@@ -12,19 +12,20 @@ export async function GET (request) {
 
     const userExist = await user.findOne({ email })
     if (!userExist) {
-      return { error: { email: 'No existe una cuenta con este email.' } }
+      return NextResponse.json({ error: { email: 'No existe una cuenta con este email.', status: 500 } })
     }
 
     if (userExist.tokenConfirm === '') {
-      return { error: { confirm: 'Esta cuenta ya ha sido confirmada.' } }
+      return NextResponse.json({ error: { confirm: 'Esta cuenta ya ha sido confirmada.', status: 500 } })
     }
 
     if (userExist.tokenConfirm !== tokenConfirm) {
-      return { error: { confirm: 'Código de confirmación inválido.' } }
+      return NextResponse.json({ error: { confirm: 'Código de confirmación inválido.', status: 500 } })
     }
 
     await user.findOneAndUpdate({ email }, { tokenConfirm: '' })
-    return NextResponse.redirect('http://localhost:3000')
+    const msg = { confirm: 'Cuenta confirmada', status: 200 }
+    return NextResponse.json({ msg })
   } catch (error) {
     console.log(error)
     return NextResponse.json({ msg: 'Hubo un error' })
