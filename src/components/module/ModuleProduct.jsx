@@ -52,14 +52,14 @@ const ModuleProduct = ({ product }) => {
           )}
         </div>
       </div>
-      <content className='grid h-[400px] md:h-[700px]'>
+      <div className='grid h-[400px] md:h-[700px]'>
         <div>
           <h2 className='text-3xl md:text-8xl font-bold'>{name}</h2>
           <span className='italic text-lg md:text-2xl'>para {category}</span>
         </div>
         <p>{description}</p>
         {!selled ? <ButtonCart size={size} product={product} /> : <p className='text-lg'>No hay en existencia</p>}
-      </content>
+      </div>
     </>
   )
 }
