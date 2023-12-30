@@ -50,17 +50,7 @@ const ModuleProduct = ({ id }) => {
                     height={500}
                     className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
                   />
-                )
-                // : (
-                //   <Image
-                //     alt={`${currentProduct.name} ${currentProduct.category}`}
-                //     src={`/clothes/${main?.img}`}
-                //     width={800}
-                //     height={500}
-                //     className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
-                //   />
-                //   )
-                  }
+                )}
 
               <div className='grid grid-cols-3 w-full place-items-center mt-4'>
                 {currentProduct.aditionals?.map((img, index) => (
