@@ -7,7 +7,6 @@ import { fetchFn } from '../utils/fetchFn'
 import { Spinner } from '@nextui-org/react'
 
 const ModuleProduct = ({ id }) => {
-  const [main, setMain] = useState({})
   const [currentProduct, setCurrentProduct] = useState({})
   const [loading, setLoading] = useState(true)
 
@@ -20,7 +19,6 @@ const ModuleProduct = ({ id }) => {
         body: null,
         front: true
       })
-      setMain({ index: 0, img: product.image })
       setCurrentProduct(product)
     }
 
@@ -28,12 +26,12 @@ const ModuleProduct = ({ id }) => {
     setLoading(false)
   }, [])
 
-  const handleMain = (value, img) => {
-    setMain({
-      index: value,
-      img
-    })
-  }
+  // const handleMain = (value, img) => {
+  //   setMain({
+  //     index: value,
+  //     img
+  //   })
+  // }
 
   return (
     <>
@@ -61,7 +59,7 @@ const ModuleProduct = ({ id }) => {
                     width={800}
                     height={500}
                     className='w-11/12 h-[100px] md:h-[200px] object-cover rounded-xl col-span-1 cursor-pointer'
-                    onClick={() => handleMain(index, img)}
+                    // onClick={() => handleMain(index, img)}
                   />
                 ))}
               </div>
