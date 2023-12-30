@@ -1,6 +1,5 @@
+import { NextResponse } from 'next/server'
 import { createProduct, getProducts, updateStatus } from './controller/product'
-
-const { NextResponse } = require('next/server')
 
 export async function POST (req, res) {
   try {
