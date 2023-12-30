@@ -2,12 +2,12 @@
 
 import Image from 'next/image'
 import ButtonCart from '../common/ButtonCart'
-// import { useEffect, useState } from 'react'
+import { useState } from 'react'
 // import { fetchFn } from '../utils/fetchFn'
 // import { Spinner } from '@nextui-org/react'
 
 const ModuleProduct = ({ id, product }) => {
-  // const [main, setMain] = useState({ index: 0, img: '/tracksLogo.png' })
+  const [main, setMain] = useState({ index: 0, img: null })
   // const [currentProduct, setCurrentProduct] = useState({})
   // const [loading, setLoading] = useState(true)
 
@@ -30,18 +30,18 @@ const ModuleProduct = ({ id, product }) => {
   //   }, 1000)
   // }, [])
 
-  // const handleMain = (value, img) => {
-  //   setMain({
-  //     index: value,
-  //     img
-  //   })
-  // }
+  const handleMain = (value, img) => {
+    setMain({
+      index: value,
+      img
+    })
+  }
 
   return (
     <>
       <div className='p-2 md:p-5'>
-        {product.image &&
-          (
+        {product.image && main.img === null
+          ? (
             <Image
               alt={`${product.name} ${product.category}`}
               src={`/clothes/${product.image}`}
@@ -49,14 +49,14 @@ const ModuleProduct = ({ id, product }) => {
               height={500}
               className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
             />
-          )}
-        {/* // : (<Image
-          //     alt={`${product.name} ${product.category}`}
-          //     src={`/clothes/${main.img}`}
-          //     width={800}
-          //     height={500}
-          //     className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
-          //    />)} */}
+            )
+          : (<Image
+              alt={`${product.name} ${product.category}`}
+              src={`/clothes/${main.img}`}
+              width={800}
+              height={500}
+              className='h-[350px] md:h-[600px] object-cover w-full rounded-xl'
+             />)}
 
         <div className='grid grid-cols-3 w-full place-items-center mt-4'>
           {product.aditionals?.map((img, index) => (
@@ -67,7 +67,7 @@ const ModuleProduct = ({ id, product }) => {
               width={800}
               height={500}
               className='w-11/12 h-[100px] md:h-[200px] object-cover rounded-xl col-span-1 cursor-pointer'
-              // onClick={() => handleMain(index, img)}
+              onClick={() => handleMain(index, img)}
             />
           ))}
         </div>
