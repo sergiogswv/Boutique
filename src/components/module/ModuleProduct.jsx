@@ -39,7 +39,7 @@ const ModuleProduct = ({ product }) => {
             )}
 
         <div className='grid grid-cols-3 w-full place-items-center mt-4'>
-          {aditionals.map((img, index) =>
+          {aditionals?.map((img, index) =>
             <Image
               key={index}
               alt={img}
