@@ -30,8 +30,15 @@ const UserNav = ({ menuMobile }) => {
     const getData = async () => {
       // eslint-disable-next-line no-undef
       const token = localStorage.getItem('websession_botique')
-      const local = JSON.parse(token)
-      const data = await fetchFn({ endpoint: '/user/profile', method: 'GET', token: local.token, front: true })
+      let local = ''
+      if (token === null) {
+        local = null
+      }
+      if (token !== null) {
+        local = JSON.parse(token)
+      }
+
+      const data = await fetchFn({ endpoint: '/user/profile', method: 'GET', token: local?.token, front: true })
       handleUser(data.userExist)
       // eslint-disable-next-line no-undef
       const items = localStorage.getItem('webboutique_cart')

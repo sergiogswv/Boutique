@@ -65,7 +65,6 @@ const ModuleChangePassword = () => {
       setTimeout(() => {
         router.push('/login')
       }, 1000)
-      // envia email
     }
   })
   return (
@@ -77,7 +76,7 @@ const ModuleChangePassword = () => {
       )}
       {statusResponse?.ok && (
         <div className='text-white bg-green-700 font-medium rounded-lg px-5 py-2.5 mr-2 mb-2 w-full h-[80px] md:h-[50px] text-center uppercase text-sm md:text-lg'>
-          <p>{statusResponse?.token}</p>
+          <p>{statusResponse?.ok}</p>
         </div>
       )}
       <div className='mb-6'>
