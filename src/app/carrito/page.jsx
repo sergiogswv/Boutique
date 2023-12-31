@@ -22,6 +22,7 @@ const CartPage = () => {
   const [errorConekta, setErrorConekta] = useState(null)
   const [itemData, setItemData] = useState({})
   const [total, setTotal] = useState(0)
+  const [selled, setSelled] = useState(null)
 
   useEffect(() => {
     // eslint-disable-next-line no-undef
@@ -100,10 +101,17 @@ const CartPage = () => {
       localStorage.removeItem('webboutique_cart')
       router.push('/')
     }
+
+    if (response) {
+      setSelled(response)
+      setPayment(false)
+      document.getElementById('conekta').remove()
+    }
   }
 
   return (
     <>
+      {selled !== null && <p className='mx-auto text-center mt-5 bg-red-400 h-[25px] font-bold'>{selled.map(itemSelled => itemSelled)}</p>}
       <div className='w-10/12 grid mt-10 mx-auto'>
         {loading
           ? (
@@ -130,7 +138,7 @@ const CartPage = () => {
                       <Button color='success' variant='shadow' className='w-[300px] uppercase text-white' onPress={handlePayment}>
                         Proceder al pago
                       </Button>
-                      <div className={`${!payment ? 'hidden' : 'flex items-center justify-center'} absolute z-50 top-0 left-0 w-full h-screen bg-opacity-50 bg-slate-500`}>
+                      <div className={`${!payment ? 'hidden' : 'flex items-center justify-center'} absolute z-50 top-0 left-0 w-full h-screen bg-opacity-50 bg-slate-500`} id='conekta'>
                         {errorConekta}
                         <div id='example' className='' />
                       </div>
