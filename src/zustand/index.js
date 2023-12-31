@@ -61,7 +61,10 @@ export const useStore = create(
         }
       },
       deleteItems: (item) => {
-        set((state) => ({ items: state.items.filter(i => i.idCart !== item.idCart) }))
+        const currentItems = get().items.filter(i => i._id !== item._id)
+        set((state) => ({ items: currentItems }))
+        // eslint-disable-next-line no-undef
+        localStorage.setItem('webboutique_cart', JSON.stringify(currentItems))
       },
       clearItems: () => {
         set(state => ({ items: [] }))

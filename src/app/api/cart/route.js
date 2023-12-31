@@ -55,6 +55,21 @@ export async function POST (req, res) {
     const request = await req.json()
     const itemsToUpdate = request.line_items
 
+    const someSelled = await Promise.all(itemsToUpdate.map(async item => {
+      const itemsSelled = []
+      const newItem = await product.findById({ _id: item.id })
+
+      if (newItem._doc.selled) {
+        const response = `${newItem._doc.name} ha sido vendido, favor de quitarlo del carrito y continuar con su compra`
+        itemsSelled.push(response)
+      }
+      return itemsSelled
+    }))
+
+    if (someSelled.length > 0) {
+      return NextResponse.json(someSelled)
+    }
+
     const response = await fetch('https://api.conekta.io/orders', {
       headers: {
         Accept: 'application/vnd.conekta-v2.1.0+json',
