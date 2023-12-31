@@ -37,12 +37,9 @@ export const getProducts = async (request) => {
   }
 }
 
-export const getProduct = async (request) => {
+export const getProduct = async ({ id }) => {
   try {
     await mongoose.connect(urlApi)
-
-    const { searchParams } = new URL(request.url)
-    const id = searchParams.get('id')
 
     const product = await getOneProduct({ id })
     return product
