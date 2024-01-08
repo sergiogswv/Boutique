@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { changeStatusProduct, createProductModel, getOneProduct, getProductsModel } from '../models/product'
 
 export const createProduct = async ({ request }) => {
-  const { name, category, quantity, image, size, price } = request
+  const { name, category, quantity, image, size, price, aditionals, description } = request
   try {
     await mongoose.connect(urlApi)
 
@@ -13,7 +13,9 @@ export const createProduct = async ({ request }) => {
       quantity,
       image,
       size,
-      price
+      price,
+      aditionals,
+      description
     })
     return productResponse
   } catch (error) {

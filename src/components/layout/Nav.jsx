@@ -69,7 +69,7 @@ const Nav = ({ items }) => {
           <NavbarMenuItem key={item._id}>
             <Link
               className='w-full'
-              href={item.href}
+              href={`/${item.href}`}
               size='lg'
             >
               {item.name}

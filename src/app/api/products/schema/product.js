@@ -46,10 +46,18 @@ export const ProductSchema = new mongoose.Schema({
   size: {
     type: String
   },
+  description: {
+    type: String
+  },
   selled: {
     type: Boolean,
     default: false
-  }
+  },
+  aditionals: [
+    {
+      type: String
+    }
+  ]
 })
 
 // eslint-disable-next-line dot-notation
