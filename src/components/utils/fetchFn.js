@@ -22,7 +22,8 @@ export const fetchFn = async ({ endpoint, method, body = undefined, token = '', 
       Authorization: `Bearer ${token}`
     },
     method,
-    body: method !== 'GET' ? JSON.stringify(body) : undefined
+    body: method !== 'GET' ? JSON.stringify(body) : undefined,
+    cache: 'no-store'
   })
   const data = await response.json()
   return data
