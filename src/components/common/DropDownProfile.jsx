@@ -6,7 +6,8 @@ import { formatMail, formatName } from '../utils/formatFn'
 import Link from 'next/link'
 
 const DropDownProfile = async () => {
-  const [handleToken, user] = useStore((state) => [state.handleToken, state.user])
+  const handleToken = useStore((state) => state.handleToken)
+  const user = useStore((state) => state.user)
 
   const handleLogOut = () => {
     handleToken(null)

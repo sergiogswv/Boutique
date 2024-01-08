@@ -25,12 +25,12 @@ const ModuleEdit = () => {
         front: true
       })
       setUserData({
-        name: data.userExist.name,
-        lastname: data.aditional.lastname,
-        address: data.aditional.address,
-        zipcode: data.aditional.zipcode,
-        phone: data.aditional.phone,
-        references: data.aditional.references ?? ''
+        name: data?.userExist?.name,
+        lastname: data?.aditional?.lastname,
+        address: data?.aditional?.address,
+        zipcode: data?.aditional?.zipcode,
+        phone: data?.aditional?.phone,
+        references: data?.aditional?.references ?? ''
       })
 
       setTimeout(() => {
