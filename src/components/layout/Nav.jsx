@@ -65,7 +65,7 @@ const Nav = ({ items }) => {
         </Suspense>
       </NavbarContent>
       <NavbarMenu>
-        {items.map((item) => (
+        {items?.map((item) => (
           <NavbarMenuItem key={item._id}>
             <Link
               className='w-full'
