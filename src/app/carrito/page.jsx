@@ -27,7 +27,7 @@ const CartPage = () => {
   useEffect(() => {
     // eslint-disable-next-line no-undef
     const local = JSON.parse(localStorage.getItem('websession_botique'))
-    setToken(local.token)
+    local === null ? setToken('') : setToken(local.token)
 
     setTimeout(() => {
       setLoading(false)
@@ -36,12 +36,12 @@ const CartPage = () => {
 
   useEffect(() => {
     let fullPrice = 0
-    itemsCart.forEach(item => {
+    itemsCart?.forEach(item => {
       fullPrice = fullPrice + item.price
     })
     setTotal(fullPrice)
 
-    const itemData = itemsCart.map(item => {
+    const itemData = itemsCart?.map(item => {
       const name = item.name
       const unit_price = item.price * 100
       const quantity = 1
