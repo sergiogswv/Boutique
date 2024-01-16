@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import ButtonCart from '../common/ButtonCart'
 import { useState } from 'react'
 // import { fetchFn } from '../utils/fetchFn'
@@ -42,30 +41,24 @@ const ModuleProduct = ({ id, product }) => {
       <div className='p-2 md:p-5'>
         {product.image && main.img === null
           ? (
-            <Image
+            <img
               alt={`${product.name} ${product.category}`}
               src={`/clothes/${product.image}`}
-              width={800}
-              height={500}
               className='h-[350px] md:h-[900px] object-cover w-full rounded-xl'
             />
             )
-          : (<Image
+          : (<img
               alt={`${product.name} ${product.category}`}
               src={`/clothes/${main.img}`}
-              width={800}
-              height={500}
               className='h-[350px] md:h-[900px] object-cover w-full rounded-xl'
              />)}
 
         <div className='grid grid-cols-3 w-full place-items-center mt-4'>
           {product.aditionals?.map((img, index) => (
-            <Image
+            <img
               key={index}
               alt={img}
               src={`/clothes/${img}`}
-              width={800}
-              height={500}
               className='w-11/12 h-[100px] md:h-[200px] object-cover rounded-xl col-span-1 cursor-pointer mb-10'
               onClick={() => handleMain(index, img)}
             />

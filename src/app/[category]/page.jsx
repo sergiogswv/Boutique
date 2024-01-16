@@ -1,6 +1,5 @@
 import { fetchFn } from '@/components/utils/fetchFn'
 import { Card, CardBody, CardFooter } from '@nextui-org/react'
-import Image from 'next/image'
 import Link from 'next/link'
 
 const CategoryPage = async ({ params }) => {
@@ -12,9 +11,7 @@ const CategoryPage = async ({ params }) => {
           <Card shadow='lg' key={product._id} className='h-[325px] col-span-3'>
             <CardBody className='overflow-visible p-0'>
               <Link href={`${params.category}/${product._id}`}>
-                <Image
-                  width={400}
-                  height={700}
+                <img
                   alt={product.title}
                   className='w-full object-cover h-[255px]'
                   src={`/clothes/${product.image}`}

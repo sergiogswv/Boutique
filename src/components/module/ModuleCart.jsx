@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardBody } from '@nextui-org/react'
-import Image from 'next/image'
 import React from 'react'
 import ButtonDelete from '../common/ButtonDelete'
 
@@ -15,7 +14,7 @@ const ModuleCart = ({ item }) => {
       <CardBody>
         <div className='grid grid-cols-6 md:grid-cols-12 gap-6 md:gap-4 items-center justify-center'>
           <div className='relative col-span-4 md:col-span-4'>
-            <Image
+            <img
               alt='Album cover'
               className='object-cover w-[200px] h-[200px] rounded-xl'
               height={200}
