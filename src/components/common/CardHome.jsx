@@ -1,7 +1,6 @@
 'use client'
 
 import { Card, CardFooter, CardHeader } from '@nextui-org/react'
-import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -13,10 +12,8 @@ const CardHome = ({ item, classes }) => {
         <p className='text-tiny text-black/80 uppercase font-bold bg-gray-200 px-4 rounded-t-lg'>{title}</p>
         <h3 className='text-black text-sm md:text-sm lg:text-2xl bg-gray-200 px-1 md:px-1 rounded-b-lg'>{description}</h3>
       </CardHeader>
-      <Image
+      <img
         alt={`${title} ${description}`}
-        width={400}
-        height={400}
         className='z-0 w-full h-full scale-125 -translate-y-6 object-cover'
         src={`/clothes/${img}`}
       />

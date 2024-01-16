@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react'
 import { fetchFn } from '../utils/fetchFn'
 import { Accordion, AccordionItem } from '@nextui-org/react'
 import { formatDate } from '../utils/formatFn'
-import Image from 'next/image'
 
 const ModuleShops = () => {
   const [token] = useStore((state) => [state.token])
@@ -44,7 +43,7 @@ const ModuleShops = () => {
               >
                 {shop.products.map(product => (
                   <div key={product._id} className='flex justify-evenly items-center'>
-                    <Image
+                    <img
                       alt='Album cover'
                       className='object-cover w-[75px] h-[75px] md:w-[100px] md:h-[100px] rounded-xl'
                       height={200}

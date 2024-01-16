@@ -5,7 +5,6 @@ import Link from 'next/link'
 import UserNav from './UserNav'
 
 import { Suspense, useEffect, useState } from 'react'
-import Image from 'next/image'
 import { redirect, usePathname } from 'next/navigation'
 import { useStore } from '@/zustand'
 
@@ -40,12 +39,10 @@ const Nav = ({ items }) => {
         />
         <NavbarBrand>
           <Link href='/'>
-            <Image
+            <img
               alt='Logo Tracks Boutique'
               src='/horizontalLogoTracks.png'
-              className='w-6/12 md:mt-10'
-              width={350}
-              height={350}
+              className='w-[250px] md:mt-10'
             />
           </Link>
         </NavbarBrand>
